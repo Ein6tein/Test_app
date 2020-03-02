@@ -1,12 +1,26 @@
 package com.example.testapp.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import org.parceler.Parcel;
+
+@Entity
+@Parcel
 public class Employee {
 
+    @PrimaryKey
     private int id;
+    @ColumnInfo
     private String name;
+    @ColumnInfo
     private int age;
+    @ColumnInfo
     private float salary;
+    @ColumnInfo
     private String occupation;
+    @ColumnInfo
     private String photo;
 
     public int getId() {

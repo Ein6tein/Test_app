@@ -18,11 +18,11 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NetworkReposity {
+public class NetworkRepository {
 
     private Retrofit retrofit = null;
 
-    public NetworkReposity() {
+    public NetworkRepository() {
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://dummy.restapiexample.com/")
                 .addConverterFactory(GsonConverterFactory.create())

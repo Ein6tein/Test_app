@@ -18,12 +18,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ItemViewHolder> {
 
     private Context mContext;
     private List<Employee> mEmployees;
     private LayoutInflater mInflater;
+    private OnItemClick mListener;
 
     public EmployeeAdapter(Context context, List<Employee> employees) {
         mContext = context;
@@ -44,6 +46,14 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ItemVi
         return mEmployees.size();
     }
 
+    public void setOnItemClickListener(OnItemClick listener) {
+        mListener = listener;
+    }
+
+    public interface OnItemClick {
+        void onClick(Employee employee);
+    }
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.iv_photo) ImageView mPhoto;
@@ -52,6 +62,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ItemVi
         ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick void onClick() {
+            if (mListener != null) mListener.onClick(mEmployees.get(getAdapterPosition()));
         }
 
         void setup(Employee employee) {
