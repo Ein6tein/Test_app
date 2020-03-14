@@ -20,6 +20,7 @@ import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -68,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
                         mRecyclerView.setAdapter(adapter);
                     }
                 });
+    }
+
+    @OnClick(R.id.fab_add) void onAddClicked() {
+        Intent intent = new Intent(this, AddEditActivity.class);
+        startActivity(intent);
     }
 
     private void startDetailsActivity(Employee employee) {

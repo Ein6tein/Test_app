@@ -30,6 +30,8 @@
 
         <activity android:name=".activity.EmployeeDetailsActivity" />
 
+        <activity android:name=".activity.AddEditActivity" />
+
     </application>
 
 </manifest>

@@ -50,8 +50,10 @@ public class NetworkRepository {
             JsonObject empObject = array.get(i).getAsJsonObject();
 
             employee.setId(empObject.get("id").getAsInt());
-            employee.setName(empObject.get("employee_name").getAsString());
             employee.setPhoto(empObject.get("profile_image").getAsString());
+            employee.setName(empObject.get("employee_name").getAsString());
+            employee.setAge(empObject.get("employee_age").getAsInt());
+            employee.setSalary(empObject.get("employee_salary").getAsFloat());
             employee.setPhoto("https://media.gettyimages.com/photos/portrait-of-senior-businessman-smiling-picture-id985138660?s=612x612");
 
             employees.add(employee);
