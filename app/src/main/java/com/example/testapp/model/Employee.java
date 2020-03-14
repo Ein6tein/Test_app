@@ -10,7 +10,7 @@ import org.parceler.Parcel;
 @Parcel
 public class Employee {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo
     private String name;

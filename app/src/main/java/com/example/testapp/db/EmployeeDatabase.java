@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.testapp.model.Employee;
 
-@Database(entities = Employee.class, version = 1)
+@Database(entities = Employee.class, version = 2)
 public abstract class EmployeeDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "employee_database";
@@ -18,7 +18,7 @@ public abstract class EmployeeDatabase extends RoomDatabase {
 
     public static EmployeeDatabase getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = Room.databaseBuilder(context, EmployeeDatabase.class, DB_NAME).build();
+            sInstance = Room.databaseBuilder(context, EmployeeDatabase.class, DB_NAME).fallbackToDestructiveMigration().build();
         }
 
         return sInstance;
