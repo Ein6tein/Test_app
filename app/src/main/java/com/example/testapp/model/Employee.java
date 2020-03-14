@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.database.Exclude;
+
 import org.parceler.Parcel;
 
 @Entity
@@ -23,10 +25,12 @@ public class Employee {
     @ColumnInfo
     private String photo;
 
+    @Exclude
     public int getId() {
         return id;
     }
 
+    @Exclude
     public void setId(int id) {
         this.id = id;
     }
