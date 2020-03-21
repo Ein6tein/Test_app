@@ -40,7 +40,7 @@ public class NetworkRepository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private List<Employee> parse(JsonElement json) {
+    public List<Employee> parse(JsonElement json) {
         List<Employee> employees = new ArrayList<>();
 
         JsonObject jsonObject = json.getAsJsonObject();
