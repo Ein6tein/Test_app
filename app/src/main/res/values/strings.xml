@@ -11,4 +11,5 @@
     <string name="enter_occupation">Please, enter occupation here</string>
     <string name="photo">Photo</string>
     <string name="enter_photo_url">Please, enter photo URL here</string>
+    <string name="default_notification_channel">Default Channel</string>
 </resources>

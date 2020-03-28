@@ -50,6 +50,11 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ItemVi
         mListener = listener;
     }
 
+    public void addEmployee(Employee employee) {
+        mEmployees.add(employee);
+        notifyDataSetChanged();
+    }
+
     public interface OnItemClick {
         void onClick(Employee employee);
     }
