@@ -1,4 +1,4 @@
-package com.example.testapp.activity;
+package com.learning.android.testapp.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -10,10 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.testapp.R;
-import com.example.testapp.fragments.EmployeeDetailsFragment;
-import com.example.testapp.fragments.MainFragment;
-import com.example.testapp.model.Employee;
+import com.learning.android.testapp.BuildConfig;
+import com.learning.android.testapp.R;
+import com.learning.android.testapp.fragments.EmployeeDetailsFragment;
+import com.learning.android.testapp.fragments.MainFragment;
+import com.learning.android.testapp.model.Employee;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.parceler.Parcels;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EmployeeDetailsFragment mFragment;
     private boolean mIsMenuOpen;
+    private InterstitialAd mInterstitialAd;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        MobileAds.initialize(this, "ca-app-pub-4867678909528989~7863628406");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getAdId());
+        mInterstitialAd.setAdListener(new AdListener() {
+
+            @Override public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override public void onAdClosed() {
+                Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+                startActivity(intent);
+            }
+        });
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     @Override protected void onStart() {
@@ -117,8 +138,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.fab_add) void onAddClicked() {
-        Intent intent = new Intent(this, AddEditActivity.class);
-        startActivity(intent);
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            Intent intent = new Intent(this, AddEditActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void showEmployee(Employee employee) {
@@ -137,5 +162,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EmployeeDetailsActivity.class);
         intent.putExtra(EmployeeDetailsActivity.EXTRA_EMPLOYEE, Parcels.wrap(employee));
         startActivity(intent);
+    }
+
+    private String getAdId() {
+        return BuildConfig.DEBUG
+                ? "ca-app-pub-3940256099942544/1033173712"
+                : "ca-app-pub-4867678909528989/7964728424";
     }
 }

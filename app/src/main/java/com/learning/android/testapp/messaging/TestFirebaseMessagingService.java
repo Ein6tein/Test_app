@@ -1,4 +1,4 @@
-package com.example.testapp.messaging;
+package com.learning.android.testapp.messaging;
 
 import androidx.annotation.NonNull;
 

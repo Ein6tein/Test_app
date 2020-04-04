@@ -1,4 +1,4 @@
-package com.example.testapp.network.api;
+package com.learning.android.testapp.network.api;
 
 import com.google.gson.JsonElement;
 

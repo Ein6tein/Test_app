@@ -1,4 +1,4 @@
-package com.example.testapp.activity;
+package com.learning.android.testapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.testapp.R;
-import com.example.testapp.fragments.EmployeeDetailsFragment;
-import com.example.testapp.model.Employee;
+import com.learning.android.testapp.R;
+import com.learning.android.testapp.fragments.EmployeeDetailsFragment;
+import com.learning.android.testapp.model.Employee;
 
 import org.parceler.Parcels;
 

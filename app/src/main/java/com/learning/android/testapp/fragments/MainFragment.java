@@ -1,7 +1,9 @@
-package com.example.testapp.fragments;
+package com.learning.android.testapp.fragments;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +11,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.testapp.R;
-import com.example.testapp.activity.MainActivity;
-import com.example.testapp.adapter.EmployeeAdapter;
-import com.example.testapp.db.EmployeeDatabase;
-import com.example.testapp.decoration.CardViewDecoration;
-import com.example.testapp.model.Employee;
+import com.learning.android.testapp.BuildConfig;
+import com.learning.android.testapp.R;
+import com.learning.android.testapp.activity.MainActivity;
+import com.learning.android.testapp.adapter.EmployeeAdapter;
+import com.learning.android.testapp.db.EmployeeDatabase;
+import com.learning.android.testapp.model.Employee;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.formats.NativeAd;
+import com.google.android.gms.ads.formats.NativeAdOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -83,6 +89,28 @@ public class MainFragment extends Fragment {
             }
         });
 
+        AdLoader adLoader = new AdLoader.Builder(getActivity(), getAdId())
+                .forUnifiedNativeAd(unifiedNativeAd -> {
+                    String headline = unifiedNativeAd.getHeadline();
+                    NativeAd.Image image = unifiedNativeAd.getImages().get(0);
+                    Uri uri = image.getUri();
+
+                    Employee ad = new Employee();
+                    ad.setName(headline);
+                    ad.setPhoto(uri.toString());
+
+                    mAdapter.addEmployee(ad);
+                })
+                .withAdListener(new AdListener() {
+
+                    @Override public void onAdFailedToLoad(int errorCode) {
+                        Log.e("AD", "Didn't load. Error code: " + errorCode);
+                    }
+                })
+                .withNativeAdOptions(new NativeAdOptions.Builder().build())
+                .build();
+        adLoader.loadAd(new AdRequest.Builder().build());
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         // if (getResources().getBoolean(R.bool.is_phone)) {
         // } else {
@@ -112,5 +140,11 @@ public class MainFragment extends Fragment {
                     // reference.updateChildren(toAdd);
                 });
         // reference.child("0").removeValue();
+    }
+
+    private String getAdId() {
+        return BuildConfig.DEBUG
+                ? "ca-app-pub-3940256099942544/2247696110"
+                : "ca-app-pub-4867678909528989/6806725272";
     }
 }

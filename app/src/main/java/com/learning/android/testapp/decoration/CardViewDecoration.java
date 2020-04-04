@@ -1,4 +1,4 @@
-package com.example.testapp.decoration;
+package com.learning.android.testapp.decoration;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.testapp.R;
+import com.learning.android.testapp.R;
 
 public class CardViewDecoration extends RecyclerView.ItemDecoration {
 

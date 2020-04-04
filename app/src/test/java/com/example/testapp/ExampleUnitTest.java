@@ -1,7 +1,7 @@
 package com.example.testapp;
 
-import com.example.testapp.model.Employee;
-import com.example.testapp.network.NetworkRepository;
+import com.learning.android.testapp.model.Employee;
+import com.learning.android.testapp.network.NetworkRepository;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 

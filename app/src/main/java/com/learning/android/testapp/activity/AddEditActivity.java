@@ -1,16 +1,24 @@
-package com.example.testapp.activity;
+package com.learning.android.testapp.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
-import com.example.testapp.R;
-import com.example.testapp.db.EmployeeDao;
-import com.example.testapp.db.EmployeeDatabase;
-import com.example.testapp.model.Employee;
+import com.learning.android.testapp.BuildConfig;
+import com.learning.android.testapp.R;
+import com.learning.android.testapp.databinding.ActivityAddEditBinding;
+import com.learning.android.testapp.db.EmployeeDao;
+import com.learning.android.testapp.db.EmployeeDatabase;
+import com.learning.android.testapp.model.Employee;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.parceler.Parcels;
 
@@ -29,13 +37,16 @@ public class AddEditActivity extends AppCompatActivity {
     @BindView(R.id.et_salary) EditText mSalary;
     @BindView(R.id.et_occupation) EditText mOccupation;
     @BindView(R.id.et_photo) EditText mPhoto;
+    @BindView(R.id.ad_view) AdView mAdView;
 
     private Employee mEmployee;
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit);
+        ActivityAddEditBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_add_edit);
+        binding.setAdId(getAdId());
         ButterKnife.bind(this);
+        MobileAds.initialize(this, "ca-app-pub-4867678909528989~7863628406");
     }
 
     @Override protected void onStart() {
@@ -49,6 +60,14 @@ public class AddEditActivity extends AppCompatActivity {
             mOccupation.setText(mEmployee.getOccupation());
             mPhoto.setText(mEmployee.getPhoto());
         }
+        mAdView.setAdListener(new AdListener() {
+
+            @Override public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+                mAdView.setVisibility(View.GONE);
+            }
+        });
+        mAdView.loadAd(new AdRequest.Builder().build());
     }
 
     @OnClick(R.id.fab_save) void onSaveClicked() {
@@ -110,5 +129,11 @@ public class AddEditActivity extends AppCompatActivity {
         }
 
         return isValid;
+    }
+
+    private String getAdId() {
+        return BuildConfig.DEBUG
+                ? "ca-app-pub-3940256099942544/6300978111"
+                : "ca-app-pub-4867678909528989/1561943935";
     }
 }

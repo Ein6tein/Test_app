@@ -1,4 +1,4 @@
-package com.example.testapp.adapter;
+package com.learning.android.testapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.testapp.R;
-import com.example.testapp.model.Employee;
+import com.learning.android.testapp.R;
+import com.learning.android.testapp.model.Employee;
 
 import java.util.List;
 

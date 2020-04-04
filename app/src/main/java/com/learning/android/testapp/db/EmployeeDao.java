@@ -1,4 +1,4 @@
-package com.example.testapp.db;
+package com.learning.android.testapp.db;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.testapp.model.Employee;
+import com.learning.android.testapp.model.Employee;
 
 import java.util.List;
 

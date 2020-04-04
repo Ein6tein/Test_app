@@ -1,7 +1,7 @@
-package com.example.testapp.network;
+package com.learning.android.testapp.network;
 
-import com.example.testapp.model.Employee;
-import com.example.testapp.network.api.EmployeeApi;
+import com.learning.android.testapp.model.Employee;
+import com.learning.android.testapp.network.api.EmployeeApi;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,7 +13,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

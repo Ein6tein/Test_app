@@ -1,4 +1,4 @@
-package com.example.testapp.db;
+package com.learning.android.testapp.db;
 
 
 import android.content.Context;
@@ -7,7 +7,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.testapp.model.Employee;
+import com.learning.android.testapp.model.Employee;
 
 @Database(entities = Employee.class, version = 2)
 public abstract class EmployeeDatabase extends RoomDatabase {

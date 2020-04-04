@@ -1,4 +1,4 @@
-package com.example.testapp.activity;
+package com.learning.android.testapp.activity;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -10,8 +10,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.MediumTest;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.testapp.R;
-import com.example.testapp.model.Employee;
+import com.learning.android.testapp.R;
+import com.learning.android.testapp.model.Employee;
 
 import org.hamcrest.Matcher;
 import org.junit.Rule;
